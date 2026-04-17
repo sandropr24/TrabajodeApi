@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dragon Ball App</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+  <header>
+    <h1>Personajes Dragon Ball</h1>
+  </header>
+
+  <section class="filtro">
+    <label>Selecciona una raza:</label>
+
+    <select id="raza">
+      <option value="">-- Seleccionar --</option>
+      <option value="Saiyan">Saiyajin</option>
+      <option value="Human">Humano</option>
+      <option value="Namekian">Namekiano</option>
+      <option value="Frieza Race">Raza de Freezer</option>
+      <option value="Android">Androide</option>
+    </select>
+
+    <button id="btnMostrar">Mostrar</button>
+  </section>
+
+  <section class="tabla-container">
+    <table id="tabla">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Ki</th>
+          <th>Género</th>
+          <th>Imagen</th>
+          <th>Detalles</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </section>
+
+  <div id="modal" class="modal">
+    <span id="cerrarModal">&times;</span>
+    <img id="imgModal">
+  </div>
+
+  <section id="detalles" class="detalles">
+  </section>
+
+  <section id="transformaciones" class="transformaciones">
+  </section>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
