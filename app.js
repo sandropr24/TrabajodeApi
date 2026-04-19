@@ -10,3 +10,18 @@ const transformaciones = document.getElementById("transformaciones");
 
 let personajesGlobal = [];
 
+async function obtenerTodosLosPersonajes() {
+  let url = "https://dragonball-api.com/api/characters";
+  let todos = [];
+
+  while (url) {
+    const respuesta = await fetch(url);
+    const datos = await respuesta.json();
+
+    todos = todos.concat(datos.items);
+    url = datos.links.next || null;
+  }
+
+  return todos;
+}
+
