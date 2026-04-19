@@ -77,3 +77,104 @@ btnMostrar.addEventListener("click", async () => {
   }
 });
 
+function verImagen(imagen) {
+  modal.style.display = "block";
+  imgModal.src = imagen;
+}
+
+cerrarModal.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
+async function verDetalle(id) {
+  try {
+    const respuesta = await fetch(`https://dragonball-api.com/api/characters/${id}`);
+    const personaje = await respuesta.json();
+
+    let opciones = `<option value="">Selecciona una transformación</option>`;
+
+    if (personaje.transformations && personaje.transformations.length > 0) {
+      opciones += personaje.transformations
+        .map((t, i) => `<option value="${i}">${t.name}</option>`)
+        .join("");
+    }
+
+    detalles.innerHTML = `
+      <div class="contenedor-detalle">
+
+        <!-- IZQUIERDA -->
+        <div class="panel-personaje">
+          <h2>${personaje.name}</h2>
+          <p><strong>Raza:</strong> ${personaje.race}</p>
+          <p><strong>Género:</strong> ${personaje.gender}</p>
+          <p><strong>Ki:</strong> ${personaje.ki}</p>
+          <p><strong>Max Ki:</strong> ${personaje.maxKi}</p>
+          <p><strong>Afiliación:</strong> ${personaje.affiliation}</p>
+          <p><strong>Descripción:</strong> ${personaje.description}</p>
+        </div>
+
+        <!-- DERECHA -->
+        <div class="panel-transformaciones">
+          <h3>Transformaciones</h3>
+
+          ${
+            personaje.transformations && personaje.transformations.length > 0
+              ? `
+              <div class="barra-transformaciones">
+                <select id="selectTransformacion">
+                  ${opciones}
+                </select>
+                <button id="btnVerTransformacion">Ver</button>
+              </div>
+
+              <div id="detalleTransformacion">
+                <p>Selecciona una transformación</p>
+              </div>
+            `
+              : `<p>No tiene transformaciones</p>`
+          }
+
+        </div>
+
+      </div>
+    `;
+
+    transformaciones.innerHTML = "";
+
+    if (personaje.transformations && personaje.transformations.length > 0) {
+      const select = document.getElementById("selectTransformacion");
+      const btn = document.getElementById("btnVerTransformacion");
+      const cont = document.getElementById("detalleTransformacion");
+
+      btn.addEventListener("click", () => {
+        const index = select.value;
+
+        if (index === "") {
+          cont.innerHTML = `<p>Selecciona una transformación</p>`;
+          return;
+        }
+
+        const t = personaje.transformations[index];
+
+        cont.innerHTML = `
+          <div class="card-transformacion">
+            <img src="${t.image}" alt="${t.name}">
+            <div>
+              <p><strong>${t.name}</strong></p>
+              <p>Ki: ${t.ki}</p>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+  } catch (error) {
+    console.log("Error:", error);
+  }
+}
