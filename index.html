@@ -5,6 +5,7 @@
   <title>Dragon Ball App</title>
 
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="componentes.css">
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -19,7 +20,7 @@
     <label>Selecciona una raza:</label>
 
     <select id="raza">
-      <option value="">-- Seleccionar --</option>
+      <option value="">Seleccionar</option>
       <option value="Saiyan">Saiyajin</option>
       <option value="Human">Humano</option>
       <option value="Namekian">Namekiano</option>
@@ -42,7 +43,7 @@
           <th>Detalles</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="cuerpoTabla">
       </tbody>
     </table>
   </section>
@@ -59,6 +60,11 @@
   </section>
 
   <script src="app.js"></script>
+
+  <footer class="footer">
+  <p>© 2026 - Proyecto Dragon Ball API</p>
+  <p>Desarrollado por <span>Sandro Pachas Romani</span></p>
+</footer>
 
 </body>
 </html>

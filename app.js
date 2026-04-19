@@ -1,1 +1,12 @@
-//Estructurando el proyecto 
+// Estructurando el proyecto
+const cuerpoTabla = document.getElementById("cuerpoTabla");
+const btnMostrar = document.getElementById("btnMostrar");
+const selectRaza = document.getElementById("raza");
+const modal = document.getElementById("modal");
+const imgModal = document.getElementById("imgModal");
+const cerrarModal = document.getElementById("cerrarModal");
+const detalles = document.getElementById("detalles");
+const transformaciones = document.getElementById("transformaciones");
+
+let personajesGlobal = [];
+
