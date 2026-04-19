@@ -25,3 +25,55 @@ async function obtenerTodosLosPersonajes() {
   return todos;
 }
 
+btnMostrar.addEventListener("click", async () => {
+  try {
+    const razaSeleccionada = selectRaza.value;
+
+    if (razaSeleccionada === "") {
+      alert("Selecciona una raza");
+      return;
+    }
+
+    const personajes = await obtenerTodosLosPersonajes();
+    personajesGlobal = personajes;
+
+    const filtrados = personajes.filter(
+      (personaje) => personaje.race === razaSeleccionada
+    );
+
+    cuerpoTabla.innerHTML = "";
+    detalles.innerHTML = "";
+    transformaciones.innerHTML = "";
+
+    if (filtrados.length === 0) {
+      cuerpoTabla.innerHTML = `
+        <tr>
+          <td colspan="6">No se encontraron personajes para esta raza</td>
+        </tr>
+      `;
+      return;
+    }
+
+    filtrados.forEach((personaje) => {
+      cuerpoTabla.innerHTML += `
+        <tr>
+          <td>${personaje.id}</td>
+          <td>${personaje.name}</td>
+          <td>${personaje.ki}</td>
+          <td>${personaje.gender}</td>
+          <td>
+            <button onclick="verImagen('${personaje.image}')">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </td>
+          <td>
+            <button onclick="verDetalle(${personaje.id})">Ver</button>
+          </td>
+        </tr>
+      `;
+    });
+  } catch (error) {
+    console.log("Error:", error);
+  }
+});
+
